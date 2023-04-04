@@ -7,7 +7,7 @@ int main(){
 	SDL_Rect pos;
 	Personne p;
 	SDL_Event event;
-	int done=1,accel=-1,decel=-1,posinit=0;
+	int done=1,accel=-1,decel=-1,posinit=0,keyup=0;
 	uint32_t dt,t_prev;
 	back=IMG_Load("BACKGROUND.png");
 	pos.x=0;
@@ -22,13 +22,13 @@ int main(){
 				if(event.key.keysym.sym==SDLK_ESCAPE){
 					done=0;
 				}
-				else if(event.key.keysym.sym==SDLK_RIGHT){
+				else if(event.key.keysym.sym==SDLK_RIGHT&&p.up==0){
 					p.Direction=1;
 					p.vitesse=5;
 					accel=1;
 					decel=0;
 				}
-				else if(event.key.keysym.sym==SDLK_LEFT){
+				else if(event.key.keysym.sym==SDLK_LEFT&&p.up==0){
 					p.Direction=2;
 					p.vitesse=5;
 					accel=1;
@@ -41,7 +41,7 @@ int main(){
 				break;
 			case SDL_KEYUP:
 				if(event.key.keysym.sym==SDLK_LEFT||event.key.keysym.sym==SDLK_RIGHT){
-					p.vitesse=0;
+					keyup=1;
 					accel=0;
 					decel=1;
 				}
@@ -51,10 +51,16 @@ int main(){
 		if(accel==1&&p.acceleration<1.36){
 			p.acceleration+=0.06;
 		}
-		if(decel==1){
-			p.acceleration-=0.06;
+		if(p.up==0){
+			if(decel==1){
+				p.acceleration-=0.06;
+			}
+			if(keyup==1){
+				p.vitesse=0;
+				keyup=0;
+			}
+			p.acceleration-=0.01;
 		}
-		p.acceleration-=0.01;
 		if (p.acceleration<0){
 			p.acceleration=0;
 		}
