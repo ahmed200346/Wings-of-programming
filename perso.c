@@ -16,6 +16,14 @@ void initPerso(Personne *p){
 		sprintf(image,"lsprite%d.png",i);
 		p->perso[2][i-1]=IMG_Load(image);
 	}
+	for(i=1;i<8;i++){
+		sprintf(image,"jsprite%d.png",i);
+		p->perso[3][i-1]=IMG_Load(image);
+	}
+	for(i=1;i<8;i++){
+		sprintf(image,"ljsprite%d.png",i);
+		p->perso[4][i-1]=IMG_Load(image);
+	}
 	p->PosEcran.x=80;
 	p->PosEcran.y=300;
 	p->PosEcran.w=0;
@@ -27,11 +35,17 @@ void initPerso(Personne *p){
 	p->vitesse=0; 
 	p->acceleration=0;
 	p->up=0;
-	p->vitesse_saut=25; 
+	p->vitesse_saut=23; 
 }
 void afficherPerso(Personne p, SDL_Surface * screen){
-	if(p.vitesse!=0){	
+	if(p.vitesse!=0&&p.up==0){	
 		SDL_BlitSurface(p.perso[p.Direction][p.sprite],NULL,screen,&p.PosEcran);
+	}
+	else if(p.up!=0&&p.Direction==1){
+		SDL_BlitSurface(p.perso[3][p.sprite],NULL,screen,&p.PosEcran);
+	}
+	else if(p.up!=0&&p.Direction==2){
+		SDL_BlitSurface(p.perso[4][p.sprite],NULL,screen,&p.PosEcran);
 	}
 	else{
 		SDL_BlitSurface(p.perso[0][0],NULL,screen,&p.PosEcran);
@@ -44,9 +58,15 @@ void movePerso (Personne *p, uint32_t dt){
 		dx=-1*dx;
 	}
 	p->PosEcran.x=p->PosEcran.x+dx;
+	if(p->PosEcran.x>1235){
+		p->PosEcran.x=1235;
+	}
+	else if(p->PosEcran.x<0){
+		p->PosEcran.x=0;
+	}
 }
 void animerPerso (Personne* p){
-	if(p->Direction==1){
+	if(p->Direction==1&&p->up==0){
 		if(p->sprite<8){
 			p->sprite+=1;
 		}
@@ -54,12 +74,20 @@ void animerPerso (Personne* p){
 			p->sprite=0;
 		}
 	}
-	else if(p->Direction==2){
+	else if(p->Direction==2&&p->up==0){
 		if(p->sprite<8){
 			p->sprite+=1;
 		}
 		else{
 			p->sprite=0;
+		}
+	}
+	else if(p->up==1||p->up==2){
+		if(p->sprite<3&&p->up==1){
+			p->sprite+=1;
+		}
+		else if(p->sprite<6&&p->up==2){
+			p->sprite+=1;
 		}
 	}
 	else{
@@ -68,17 +96,17 @@ void animerPerso (Personne* p){
 }
 void saut(Personne *p,int dt, int posinit){
 	if(p->up==1){	
-		if(p->PosEcran.y>=posinit-200){
-			p->PosEcran.y-=p->vitesse_saut-5;
+		if(p->PosEcran.y>=posinit-225){
+			p->PosEcran.y-=p->vitesse_saut;
 		}
 		else{
-			p->PosEcran.y=posinit-200;
+			p->PosEcran.y=posinit-225;
 			p->up=2;
 		}
 	}
 	else if(p->up==2){
 		if(p->PosEcran.y<=posinit){
-			p->PosEcran.y+=p->vitesse_saut+10;
+			p->PosEcran.y+=p->vitesse_saut-3;
 		}
 		else{
 			p->PosEcran.y=posinit;

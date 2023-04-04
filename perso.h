@@ -2,7 +2,7 @@
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_mixer.h>
 typedef struct perso{
-	SDL_Surface *perso[3][9];
+	SDL_Surface *perso[5][9];
 	SDL_Rect PosEcran;
 	int Direction,vie,score,vitesse_saut,sprite,up;
 	double vitesse, acceleration;

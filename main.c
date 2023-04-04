@@ -34,8 +34,9 @@ int main(){
 					accel=1;
 					decel=0;
 				}
-				else if(event.key.keysym.sym==SDLK_UP){
+				else if(event.key.keysym.sym==SDLK_UP&&p.up==0){
 					p.up=1;
+					p.sprite=0;
 				}
 				break;
 			case SDL_KEYUP:
@@ -47,7 +48,7 @@ int main(){
 				break;
 			}
 		}
-		if(accel==1){
+		if(accel==1&&p.acceleration<1.36){
 			p.acceleration+=0.06;
 		}
 		if(decel==1){
