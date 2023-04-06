@@ -77,6 +77,5 @@ int main(){
 		SDL_Flip(screen);
 		SDL_Delay(20);
 	}
-	//SDL_FreeSurface(p.perso);
 	return 0;
 }

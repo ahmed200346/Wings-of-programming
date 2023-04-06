@@ -35,7 +35,7 @@ void initPerso(Personne *p){
 	p->vitesse=0; 
 	p->acceleration=0;
 	p->up=0;
-	p->vitesse_saut=23; 
+	p->vitesse_saut=30; 
 }
 void afficherPerso(Personne p, SDL_Surface * screen){
 	if(p.vitesse!=0&&p.up==0){	
@@ -96,17 +96,25 @@ void animerPerso (Personne* p){
 }
 void saut(Personne *p,int dt, int posinit){
 	if(p->up==1){	
-		if(p->PosEcran.y>=posinit-225){
+		if(p->PosEcran.y>=posinit-200){
+			if(p->vitesse_saut>0){
+				p->vitesse_saut-=2.15;
+			}
 			p->PosEcran.y-=p->vitesse_saut;
+			printf("up=%f\n",p->vitesse_saut);
 		}
 		else{
-			p->PosEcran.y=posinit-225;
-			p->up=2;
+			p->PosEcran.y=posinit-200;
+			p->up=2.1;
 		}
 	}
 	else if(p->up==2){
 		if(p->PosEcran.y<=posinit){
-			p->PosEcran.y+=p->vitesse_saut-3;
+			if(p->vitesse_saut<30){
+				p->vitesse_saut+=2.15;
+			}
+			p->PosEcran.y+=p->vitesse_saut;
+			printf("down=%f\n",p->vitesse_saut);
 		}
 		else{
 			p->PosEcran.y=posinit;

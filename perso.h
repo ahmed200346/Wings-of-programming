@@ -4,8 +4,8 @@
 typedef struct perso{
 	SDL_Surface *perso[5][9];
 	SDL_Rect PosEcran;
-	int Direction,vie,score,vitesse_saut,sprite,up;
-	double vitesse, acceleration;
+	int Direction,vie,score,sprite,up;
+	double vitesse,acceleration,vitesse_saut;
 	Mix_Chunk *bref;
 }Personne;
 void init (Personne * p, int numperso);
