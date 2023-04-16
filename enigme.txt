@@ -1,0 +1,6 @@
+
+How_many_planets_are_there_in_the_Solar_System? a-9 z-8 e-12 2
+Which_planet_is_the_closest_to_the_Sun? a-Mercury z-Venus e-Earth 1
+Biggest_Planet? a-Earth z-Mars e-Jupiter 3
+Solar_System_is_located_in___galaxy? a-Andromeda z-Cygnus_A e-Milky_Way 3
+
