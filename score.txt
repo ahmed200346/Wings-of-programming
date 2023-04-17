@@ -1,0 +1,8 @@
+ahmed 500
+amine 2000
+aymen 1
+test 2333
+Hiba 12000
+MOhamed 40000
+
+
