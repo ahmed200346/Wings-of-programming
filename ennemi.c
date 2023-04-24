@@ -11,7 +11,7 @@ void initializeMonster(Enemie *monster,int x, int y)
         monster->TempImage = 3;
         monster->x = x;
         monster->y = y;
-        monster->w = MONSTER_WIDTH;
+        monster->w = 122;
         monster->h = MONSTER_HEIGHT;
         monster->Sur_Terre = 1;
 	monster->NbPas=0;
