@@ -41,7 +41,7 @@ for(i=0;i<9;i++)
     SDL_Surface  *quest = NULL ,*rep1 = NULL ,*rep2 = NULL , *rep3 = NULL;
     SDL_Rect posQ,pos1,pos2,pos3;
     TTF_Font *police = NULL;
-    SDL_Color couleur = {255,255,255} ;    
+    SDL_Color couleur = {0,255,0} ;    
     TTF_Init();
     police = TTF_OpenFont("font.ttf", 35);
     quest = TTF_RenderText_Blended(police, e->question, couleur);
